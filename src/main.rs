@@ -149,9 +149,37 @@ fn main() {
     let result_s1_s2 = format!("{}, {}!", s1, s2);
     println!("{result_s1_s2}");
 
-    let new_result = &result_s1_s2;
+    let new_result = &result_s1_s2; // borrowed ownership
     println!("{new_result}");
+
+    let result_clone = result_s1_s2.clone(); // if you actually want to create a copy
+    println!("{result_clone}"); // Explicit deep copy of heap data of 'result_s1_s2'
 
     // You can use the .len() method to get the length of a string
     println!("Length of concatenated string: {}", result_s1_s2.len());
+
+    let user = User {
+        name: String::from("Pratik"),
+        age: 32,
+    };
+
+    let name = user.name;
+
+    println!("{}", name);
+    println!("{}", user.age);
+    // println!("{}", user.name); when accessing user.name,
+    // this was throwing error because the name ownership was moved to name var
+
+    let mut car_name = String::from("Honda");
+    let new_car_name = &mut car_name;
+
+    new_car_name.push_str(" Amaze");
+
+    println!("{new_car_name}");
+    println!("{}", car_name);
+}
+
+struct User {
+    name: String, // heap data
+    age: i32,     // stack data
 }
