@@ -159,10 +159,13 @@ fn main() {
     // // You can use the .len() method to get the length of a string
     // println!("Length of concatenated string: {}", result_s1_s2.len());
 
-    // let user = User {
-    //     name: String::from("Pratik"),
-    //     age: 32,
-    // };
+    let user = User {
+        name: String::from("Pratik"),
+        age: 32,
+    };
+
+    user.greet_user();
+    user.get_age();
 
     // let mut name = user.name;
 
@@ -259,10 +262,20 @@ fn main() {
     // println!("{:?}", fruits);
 }
 
-// struct User {
-//     name: String, // heap data
-//     age: i32,     // stack data
-// }
+struct User {
+    name: String, // heap data
+    age: i32,     // stack data
+}
+
+impl User {
+    fn greet_user(&self) {
+        println!("{}", self.name);
+    }
+
+    fn get_age(&self) {
+        println!("{}", self.age);
+    }
+}
 
 // fn greet_user(name: &mut String) {
 //     println!("Hello {name}");
