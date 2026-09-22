@@ -159,12 +159,14 @@ fn main() {
     // // You can use the .len() method to get the length of a string
     // println!("Length of concatenated string: {}", result_s1_s2.len());
 
-    let user = User {
+    let mut user = User {
         name: String::from("Pratik"),
         age: 32,
     };
 
     user.greet_user();
+    user.get_age();
+    user.birthday();
     user.get_age();
 
     // let mut name = user.name;
@@ -274,6 +276,11 @@ impl User {
 
     fn get_age(&self) {
         println!("{}", self.age);
+    }
+
+    fn birthday(&mut self) {
+        // mutable self so that we can update the value
+        self.age += 1;
     }
 }
 
