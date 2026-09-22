@@ -159,15 +159,15 @@ fn main() {
     // // You can use the .len() method to get the length of a string
     // println!("Length of concatenated string: {}", result_s1_s2.len());
 
-    let user = User {
-        name: String::from("Pratik"),
-        age: 32,
-    };
+    // let user = User {
+    //     name: String::from("Pratik"),
+    //     age: 32,
+    // };
 
-    let mut name = user.name;
+    // let mut name = user.name;
 
-    println!("{}", name);
-    println!("{}", user.age);
+    // println!("{}", name);
+    // println!("{}", user.age);
     // println!("{}", user.name); when accessing user.name,
     // this was throwing error because the name ownership was moved to name var
 
@@ -182,8 +182,8 @@ fn main() {
     // let japnese_char: char = 'ひ';
     // println!("{japnese_char}");
 
-    greet_user(&mut name);
-    println!("After the function call - {name}");
+    // greet_user(&mut name);
+    // println!("After the function call - {name}");
 
     // let borrowed_name = &mut name;
     // greet_user(borrowed_name);
@@ -202,53 +202,69 @@ fn main() {
     // println!("{random_number}");
     // println!("{}", vector_array[3]);
 
-    let mut user_names = vec![String::from("Pratik"), String::from("Sah")];
-    user_names.push(String::from("Tanya"));
+    // let mut user_names = vec![String::from("Pratik"), String::from("Sah")];
+    // user_names.push(String::from("Tanya"));
 
-    println!("{}", user_names[1]);
-    let title_of_user = &user_names[1]; // you can't move out a string from a vector, just borrow
-    println!("{title_of_user}");
+    // println!("{}", user_names[1]);
+    // let title_of_user = &user_names[1]; // you can't move out a string from a vector, just borrow
+    // println!("{title_of_user}");
 
-    // tuples lets you hold multiple values of different types
-    let person: (String, i32, bool) = (String::from("John"), 30, true);
-    println!("Name: {}", person.0);
-    println!("Age: {}", person.1);
-    println!("Is active: {}", person.2);
+    // // tuples lets you hold multiple values of different types
+    // let person: (String, i32, bool) = (String::from("John"), 30, true);
+    // println!("Name: {}", person.0);
+    // println!("Age: {}", person.1);
+    // println!("Is active: {}", person.2);
 
     // Tuples are often used to return multiple values from function
     // fn get_user() -> (String, i32) {
     //     (String::from("Liam"), 25)
     // }
 
-    let (person_name, person_age, person_is_active) = &person;
-    println!("P - {person_name} {person_age} {person_is_active}");
+    // let (person_name, person_age, person_is_active) = &person;
+    // println!("P - {person_name} {person_age} {person_is_active}");
 
-    let person_name = person.0;
-    println!("{person_name}");
+    // let person_name = person.0;
+    // println!("{person_name}");
 
-    // println!("{}", person.0); this will not work as the value was moved to person_name
+    // // println!("{}", person.0); this will not work as the value was moved to person_name
 
     let mut map = HashMap::new();
-    map.insert("pratik", "Sah");
+    map.insert("pratik", "Sah"); // if you insert a new value using existing key, it will replace the old one
 
-    let title = map.get("pratik");
-    println!("{:?}", title);
+    // let title = map.get("pratik"); // you can get the data like this from the map
+    // println!("{:?}", title); // but this will wrap the value with Some(value)
 
-    let fruits = vec!["apple", "banana", "orange"];
-    for fruit in &fruits {
-        // and not just fruits as it will move the ownership from fruits
-        // to the for loop and it will not be accessible after the loop
-        println!("I like {}.", fruit);
+    if let Some(val) = map.get("pratik") {
+        println!("The key exists: {val}");
+    } else {
+        println!("Key not found");
     }
-    println!("{:?}", fruits);
+
+    map.remove("pratik"); // remove the key from map
+
+    // loop through the HashMap
+    for (key, val) in map {
+        // since we are directly moving the ownership of map here, we won't be able to use map later after the loop
+        println!("Key: {key}, Val: {val}");
+    }
+
+    // map.insert("1", "2"); // this will throw error
+
+    // let fruits = vec!["apple", "banana", "orange"];
+    // for fruit in &fruits {
+    //     // and not just fruits as it will move the ownership from fruits
+    //     // to the for loop and it will not be accessible after the loop
+    //     println!("I like {}.", fruit);
+    // }
+    // println!("{:?}", fruits);
 }
 
-struct User {
-    name: String, // heap data
-    age: i32,     // stack data
-}
+// struct User {
+//     name: String, // heap data
+//     age: i32,     // stack data
+// }
 
-fn greet_user(name: &mut String) {
-    println!("Hello {name}");
-    name.push_str(" Sah");
-}
+// fn greet_user(name: &mut String) {
+//     println!("Hello {name}");
+//     name.push_str(" Sah");
+// }
